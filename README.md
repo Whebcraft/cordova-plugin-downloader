@@ -30,7 +30,7 @@ cordova plugin add https://github.com/Whebcraft/cordova-plugin-downloader
 var Downloader = window.plugins.Downloader;
 
 var downloadSuccessCallback = function(folder) {
-    
+    // alert(folder): //will alert "Download"
 };
 
 var downloadErrorCallback = function(error) {
@@ -52,11 +52,11 @@ Where the file has been downloaded
 
 This is usually in app folder.
 
-Internal storage `file:///storage/sdcard0/Android/data/YOUR.APP.ID/files/Download/THE-FILE-NAME`
+Internal storage `file:///storage/sdcard0/Android/data/YOUR.APP.ID/files/Download/THE-FILE-NAME.pdf`
 
-`Or`
+Or
 
-SD Card `file:///storage/sdcard1/Android/data/YOUR.APP.ID/files/Download/THE-FILE-NAME`
+SD Card `file:///storage/sdcard1/Android/data/YOUR.APP.ID/files/Download/THE-FILE-NAME.pdf`
 
 The ressource will be downloaded within the application's external files directory.
 
