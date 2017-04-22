@@ -146,7 +146,7 @@ public class Downloader extends CordovaPlugin {
                     case DownloadManager.STATUS_SUCCESSFUL:
                         try {
                             JSONObject entry = new JSONObject();
-                            currentDownload.callbackContext.success(Environment.getExternalStorageDirectory());
+                            currentDownload.callbackContext.success("file:///storage/sdcard0/");
                         } catch (Exception e) {
                             System.err.println("Exception: " + e.getMessage());
                             currentDownload.callbackContext.error(e.getMessage());
