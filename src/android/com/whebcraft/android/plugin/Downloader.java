@@ -84,7 +84,7 @@ public class Downloader extends CordovaPlugin {
 			File delExisingFile = new File(Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path);
 			delExisingFile.delete();
 			
-			public static String fullpath = Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path;
+			static String fullpath = Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path;
 			
 			Boolean visible = Boolean.valueOf(arg_object.getString("visible"));
 		
