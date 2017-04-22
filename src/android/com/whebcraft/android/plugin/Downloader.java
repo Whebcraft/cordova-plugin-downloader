@@ -86,7 +86,7 @@ public class Downloader extends CordovaPlugin {
 			Boolean visible = Boolean.valueOf(arg_object.getString("visible"));
 		
             Uri uri = Uri.parse(arg_object.getString("url"));
-            Download mDownload = new Download(path, callbackContext);
+            Download mDownload = new Download(path, folder, callbackContext);
 
             DownloadManager.Request request = new DownloadManager.Request(uri);
             // Restrict the types of networks over which this download may proceed.
