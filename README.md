@@ -30,7 +30,7 @@ cordova plugin add https://github.com/Whebcraft/cordova-plugin-downloader
 var Downloader = window.plugins.Downloader;
 
 var downloadSuccessCallback = function(folder) {
-    // alert(folder): //will alert "Download"
+    // alert(folder): // will alert folder name
 };
 
 var downloadErrorCallback = function(error) {
@@ -38,10 +38,11 @@ var downloadErrorCallback = function(error) {
 };
 
 var options = {
-    title: 'Downloading...', // Download Notification Title
+    title: 'Downloading File', // Download Notification Title
     description: 'The pdf file is downloading', // Download description Notification String
     url: "http://www.website.com/file.pdf", // File Url
     path: "My Pdf.pdf", // The File Name with extension
+	visible: true, // This download is visible and shows in the notifications while in progress and after completion.
     folder: "documents" // Folder to save the downloaded file, if not exist it will be created
 	
 }
@@ -49,16 +50,13 @@ var options = {
 Downloader.download(options, downloadSuccessCallback, downloadErrorCallback);
 ```
 
+<img align = "left" hspace = "19" vspace = "12" src = "image/downloader.png" />
+
 ### Get download folder
 
-The resource will be downloaded within the application's external files directory.
+The file will be downloaded within the device storage not SdCard.
 
-Internal storage `file:///storage/sdcard0/Android/data/YOUR.APP.ID/files/Download/THE-FILE-NAME.pdf`
-
-Or
-
-SD Card `file:///storage/sdcard1/Android/data/YOUR.APP.ID/files/Download/THE-FILE-NAME.pdf`
-
+Internal storage `file:///storage/sdcard0/YOUR-FOLDER-NAME/THE-FILE-NAME.pdf`
 
 WARNING: `will not overwrite existing file if it already exists.`
 

@@ -78,21 +78,32 @@ public class Downloader extends CordovaPlugin {
 			if (!direct.exists()) {
 			    direct.mkdirs();
 			}
+			
+			File delExisingFile = new File(Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path);
+			delExisingFile.delete();
+			
+			Boolean visible = Boolean.valueOf(arg_object.getString("visible"));
 		
             Uri uri = Uri.parse(arg_object.getString("url"));
             Download mDownload = new Download(path, callbackContext);
 
             DownloadManager.Request request = new DownloadManager.Request(uri);
-            //Restrict the types of networks over which this download may proceed.
+            // Restrict the types of networks over which this download may proceed.
             request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-            //Set whether this download may proceed over a roaming connection.
+            // Set whether this download may proceed over a roaming connection.
             request.setAllowedOverRoaming(true);
-            //Set the title of this download, to be displayed in notifications (if enabled).
+            // Set the title of this download, to be displayed in notifications (if enabled).
             request.setTitle(title);
-            //Set a description of this download, to be displayed in notifications (if enabled)
+            // Set a description of this download, to be displayed in notifications (if enabled)
             request.setDescription(description);
+            // This download doesn't show in the UI or in the notifications. 
+			if(!visible){
+			request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_HIDDEN);
+			} else {
+			// This download is visible and shows in the notifications while in progress and after completion.
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            //Set the local destination for the downloaded file to a path within the application's external files directory
+			}
+            // Set the local destination for the downloaded file to a path within the application's external files directory
             // request.setDestinationInExternalFilesDir(cordovaActivity, Environment.DIRECTORY_DOWNLOADS, path);
             request.setDestinationInExternalPublicDir("/"+folder, path);
 
@@ -135,7 +146,7 @@ public class Downloader extends CordovaPlugin {
                     case DownloadManager.STATUS_SUCCESSFUL:
                         try {
                             JSONObject entry = new JSONObject();
-                            currentDownload.callbackContext.success(Environment.DIRECTORY_DOWNLOADS);
+                            currentDownload.callbackContext.success("/"+folder);
                         } catch (Exception e) {
                             System.err.println("Exception: " + e.getMessage());
                             currentDownload.callbackContext.error(e.getMessage());
