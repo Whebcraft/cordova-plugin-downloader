@@ -22,7 +22,6 @@ import java.util.HashMap;
 
 public class Downloader extends CordovaPlugin {
 
-    private String fullpath;
     public static final String ACTION_DOWNLOAD = "download";
 
     private static final String TAG = "DownloaderPlugin";
@@ -83,8 +82,6 @@ public class Downloader extends CordovaPlugin {
 			
 			File delExisingFile = new File(Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path);
 			delExisingFile.delete();
-			
-			String fullpath = Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path;
 			
 			Boolean visible = Boolean.valueOf(arg_object.getString("visible"));
 		
@@ -149,6 +146,7 @@ public class Downloader extends CordovaPlugin {
                 switch (status) {
                     case DownloadManager.STATUS_SUCCESSFUL:
                         try {
+                            String fullpath = Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path;
                             JSONObject entry = new JSONObject();
                             currentDownload.callbackContext.success(fullpath);
                         } catch (Exception e) {
@@ -172,10 +170,12 @@ public class Downloader extends CordovaPlugin {
 
     private class Download {
         public String path;
+        public String folder;
         public CallbackContext callbackContext;
 
-        public Download(String path, CallbackContext callbackContext) {
+        public Download(String path, String folder, CallbackContext callbackContext) {
             this.path = path;
+            this.folder = folder;
             this.callbackContext = callbackContext;
         }
     }
