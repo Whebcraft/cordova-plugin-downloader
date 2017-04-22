@@ -72,7 +72,7 @@ public class Downloader extends CordovaPlugin {
             String folder = arg_object.getString("folder");
             String description = arg_object.getString("description");
 
-			File direct = new File(Environment.getExternalStorageDirectory()+ "/"+folder);
+			File direct = new File(Environment.getExternalStoragePublicDirectory()+ "/"+folder);
 
 			if (!direct.exists()) {
 			    direct.mkdirs();
