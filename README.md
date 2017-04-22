@@ -42,7 +42,7 @@ var options = {
     description: 'The pdf file is downloading', // Download description Notification String
     url: "http://www.website.com/file.pdf", // File Url
     path: "My Pdf.pdf", // The File Name with extension
-	visible: true, // This download is visible and shows in the notifications while in progress and after completion.
+    visible: true, // This download is visible and shows in the notifications while in progress and after completion.
     folder: "documents" // Folder to save the downloaded file, if not exist it will be created
 	
 }
