@@ -41,7 +41,8 @@ var options = {
     title: 'Downloading...', // Download Notification Title
     description: 'The pdf file is downloading', // Download description Notification String
     url: "http://www.website.com/file.pdf", // File Url
-    path: "My Pdf.pdf" // The File Name with extension
+    path: "My Pdf.pdf", // The File Name with extension
+    folder: "documents" // Folder to save the downloaded file
 	
 }
 

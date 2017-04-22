@@ -69,8 +69,15 @@ public class Downloader extends CordovaPlugin {
             JSONObject arg_object = args.getJSONObject(0);
             String path = arg_object.getString("path");
             String title = arg_object.getString("title");
+            String folder = arg_object.getString("folder");
             String description = arg_object.getString("description");
 
+			File direct = new File(Environment.getExternalStorageDirectory()+ "/"+folder);
+
+			if (!direct.exists()) {
+			    direct.mkdirs();
+			}
+		
             Uri uri = Uri.parse(arg_object.getString("url"));
             Download mDownload = new Download(path, callbackContext);
 
@@ -85,7 +92,8 @@ public class Downloader extends CordovaPlugin {
             request.setDescription(description);
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             //Set the local destination for the downloaded file to a path within the application's external files directory
-            request.setDestinationInExternalFilesDir(cordovaActivity, Environment.DIRECTORY_DOWNLOADS, path);
+            // request.setDestinationInExternalFilesDir(cordovaActivity, Environment.DIRECTORY_DOWNLOADS, path);
+            request.setDestinationInExternalPublicDir("/"+folder, path);
 
             // save the download
             downloadMap.put(downloadManager.enqueue(request), mDownload);
