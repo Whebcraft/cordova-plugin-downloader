@@ -58,7 +58,7 @@ The file will be downloaded within the device storage not SdCard.
 
 Internal storage `file:///storage/sdcard0/YOUR-FOLDER-NAME/THE-FILE-NAME.pdf`
 
-WARNING: `will not overwrite existing file if it already exists.`
+WARNING: `will overwrite existing file if it already exists.`
 
 License
 --------
