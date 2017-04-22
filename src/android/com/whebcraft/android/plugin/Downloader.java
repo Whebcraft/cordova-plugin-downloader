@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
+import java.io.File;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -72,7 +73,7 @@ public class Downloader extends CordovaPlugin {
             String folder = arg_object.getString("folder");
             String description = arg_object.getString("description");
 
-			File direct = new File(Environment.getExternalStoragePublicDirectory()+ "/"+folder);
+			File direct = new File(Environment.getExternalStorageDirectory()+ "/"+folder);
 
 			if (!direct.exists()) {
 			    direct.mkdirs();
