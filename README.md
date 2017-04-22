@@ -41,16 +41,16 @@ var options = {
     title: 'Downloading...', // Download Notification Title
     description: 'The pdf file is downloading', // Download description Notification String
     url: "http://www.website.com/file.pdf", // File Url
-    path: "My Pdf.pdf" // The File Name
+    path: "My Pdf.pdf" // The File Name with extension
+	
 }
 
 Downloader.download(options, downloadSuccessCallback, downloadErrorCallback);
 ```
 
 ### Get download folder
-Where the file has been downloaded
 
-This is usually in app folder.
+The resource will be downloaded within the application's external files directory.
 
 Internal storage `file:///storage/sdcard0/Android/data/YOUR.APP.ID/files/Download/THE-FILE-NAME.pdf`
 
@@ -58,7 +58,6 @@ Or
 
 SD Card `file:///storage/sdcard1/Android/data/YOUR.APP.ID/files/Download/THE-FILE-NAME.pdf`
 
-The ressource will be downloaded within the application's external files directory.
 
 WARNING: `will not overwrite existing file if it already exists.`
 
