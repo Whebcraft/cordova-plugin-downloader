@@ -83,6 +83,8 @@ public class Downloader extends CordovaPlugin {
 			File delExisingFile = new File(Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path);
 			delExisingFile.delete();
 			
+			public final static String fullpath = Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path;
+			
 			Boolean visible = Boolean.valueOf(arg_object.getString("visible"));
 		
             Uri uri = Uri.parse(arg_object.getString("url"));
@@ -146,7 +148,6 @@ public class Downloader extends CordovaPlugin {
                 switch (status) {
                     case DownloadManager.STATUS_SUCCESSFUL:
                         try {
-                            String fullpath = Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path;
                             JSONObject entry = new JSONObject();
                             currentDownload.callbackContext.success(fullpath);
                         } catch (Exception e) {
