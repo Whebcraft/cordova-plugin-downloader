@@ -23,7 +23,6 @@ import java.util.HashMap;
 public class Downloader extends CordovaPlugin {
 
     public static final String ACTION_DOWNLOAD = "download";
-    public String fullpath;
 
     private static final String TAG = "DownloaderPlugin";
 
@@ -84,8 +83,6 @@ public class Downloader extends CordovaPlugin {
 			File delExisingFile = new File(Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path);
 			delExisingFile.delete();
 			
-			// fullpath = new File(Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path);
-			
 			Boolean visible = Boolean.valueOf(arg_object.getString("visible"));
 		
             Uri uri = Uri.parse(arg_object.getString("url"));
@@ -107,8 +104,7 @@ public class Downloader extends CordovaPlugin {
 			// This download is visible and shows in the notifications while in progress and after completion.
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 			}
-            // Set the local destination for the downloaded file to a path within the application's external files directory
-            // request.setDestinationInExternalFilesDir(cordovaActivity, Environment.DIRECTORY_DOWNLOADS, path);
+            // Set the destination for the downloaded as defined by the user within the device files directory
             request.setDestinationInExternalPublicDir("/"+folder, path);
 
             // save the download
@@ -150,10 +146,10 @@ public class Downloader extends CordovaPlugin {
                     case DownloadManager.STATUS_SUCCESSFUL:
                         try {
                             JSONObject entry = new JSONObject();
-							entry.put("folder", Environment.getExternalStorageDirectory()+ "/"+currentDownload.folder+"/"+currentDownload.path);
-							// entry.put("file", currentDownload.path);
+							entry.put("path", "file:///storage/sdcard0/"+currentDownload.folder+"/"+currentDownload.path);
+							entry.put("file", currentDownload.path);
+							entry.put("folder", currentDownload.folder);
                             currentDownload.callbackContext.success(entry);
-                            // currentDownload.callbackContext.success(fullpath);
                         } catch (Exception e) {
                             System.err.println("Exception: " + e.getMessage());
                             currentDownload.callbackContext.error(e.getMessage());

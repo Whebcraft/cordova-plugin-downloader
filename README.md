@@ -24,39 +24,64 @@ cordova plugin add https://github.com/Whebcraft/cordova-plugin-downloader
     <plugin spec="https://github.com/Whebcraft/cordova-plugin-downloader.git" source="git" />
 ```
 
-### Usage
+### Usage Android
+
+```js
+var Downloader = window.plugins.Downloader;
+
+var downloadSuccessCallback = function(result) {
+       // result is an object
+        {
+            path: "file:///storage/sdcard0/documents/My Pdf.pdf", // Returns full file path
+            file: "My Pdf.pdf", // Returns Filename
+            folder: "documents" // Returns folder name
+        }
+       console.log(result.file); // My Pdf.pdf
+};
+
+var downloadErrorCallback = function(error) {
+    // error: string
+};
+
+var options = {
+    title: 'Downloading File', // Download Notification Title
+    url: "http://www.website.com/file.pdf", // File Url
+    path: "My Pdf.pdf", // The File Name with extension
+    description: 'The pdf file is downloading', // Download description Notification String
+    visible: true, // This download is visible and shows in the notifications while in progress and after completion.
+    folder: "documents" // Folder to save the downloaded file, if not exist it will be created
+}
+
+Downloader.download(options, downloadSuccessCallback, downloadErrorCallback);
+```
+<img align="center" src="image/android.png" />
+
+### Usage iOS
 
 ```js
 var Downloader = window.plugins.Downloader;
 
 var downloadSuccessCallback = function(folder) {
-    // alert(folder): // will alert folder name
+       // folder: string where the file has been downloaded
 };
 
 var downloadErrorCallback = function(error) {
-    //error: string
+    // error: string
 };
 
+
 var options = {
-    title: 'Downloading File', // Download Notification Title
-    description: 'The pdf file is downloading', // Download description Notification String
-    url: "http://www.website.com/file.pdf", // File Url
-    path: "My Pdf.pdf", // The File Name with extension
-    visible: true, // This download is visible and shows in the notifications while in progress and after completion.
-    folder: "documents" // Folder to save the downloaded file, if not exist it will be created
-	
+    url: "http://87.76.16.10/test10.zip", // File Url
+    path: "test10.zip", // The File Name with extension
 }
 
 Downloader.download(options, downloadSuccessCallback, downloadErrorCallback);
 ```
-
-<img align = "left" hspace = "19" vspace = "12" src = "image/downloader.png" />
+<img align="center" src="image/ios.png" />
 
 ### Get download folder
 
-The file will be downloaded within the device storage not SdCard.
-
-Internal storage `file:///storage/sdcard0/YOUR-FOLDER-NAME/THE-FILE-NAME.pdf`
+The file will be downloaded within the device storage not SdCard.(Android)
 
 WARNING: `will overwrite existing file if it already exists.`
 
