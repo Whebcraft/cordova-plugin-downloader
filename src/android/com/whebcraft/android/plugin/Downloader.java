@@ -84,7 +84,7 @@ public class Downloader extends CordovaPlugin {
 			File delExisingFile = new File(Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path);
 			delExisingFile.delete();
 			
-			fullpath = new File(Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path);
+			// fullpath = new File(Environment.getExternalStorageDirectory()+ "/"+folder+"/"+path);
 			
 			Boolean visible = Boolean.valueOf(arg_object.getString("visible"));
 		
@@ -150,7 +150,10 @@ public class Downloader extends CordovaPlugin {
                     case DownloadManager.STATUS_SUCCESSFUL:
                         try {
                             JSONObject entry = new JSONObject();
-                            currentDownload.callbackContext.success(fullpath);
+							entry.put("folder", Environment.getExternalStorageDirectory()+ "/"+currentDownload.folder+"/"+currentDownload.path);
+-                           // entry.put("file", currentDownload.path);
+-                           currentDownload.callbackContext.success(entry);
+                            // currentDownload.callbackContext.success(fullpath);
                         } catch (Exception e) {
                             System.err.println("Exception: " + e.getMessage());
                             currentDownload.callbackContext.error(e.getMessage());
